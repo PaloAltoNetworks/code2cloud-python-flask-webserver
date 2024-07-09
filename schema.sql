@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS customers_data (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    phone TEXT NOT NULL,
+    address TEXT NOT NULL,
+    contact TEXT NOT NULL
+);

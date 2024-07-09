@@ -1,0 +1,43 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<div class="row mt-4">
+    <div class="col-lg-12">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Customer List</h6>
+                <a href="{{ url_for('new_customer') }}" class="btn btn-primary btn-sm float-right">Add New Customer</a>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Phone</th>
+                            <th>Address</th>
+                            <th>Contact</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for customer in customers %}
+                        <tr>
+                            <td>{{ customer['name'] }}</td>
+                            <td>{{ customer['phone'] }}</td>
+                            <td>{{ customer['address'] }}</td>
+                            <td>{{ customer['contact'] }}</td>
+                            <td>
+                                <a href="{{ url_for('edit_customer', id=customer['id']) }}" class="btn btn-warning btn-sm">Edit</a>
+                                <form action="{{ url_for('delete_customer', id=customer['id']) }}" method="post" style="display:inline-block;">
+                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
