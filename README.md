@@ -56,6 +56,11 @@ Before you begin, ensure you have the following:
 
 Click the "Fork" button in the top-right corner to create your own copy of the repository.  
 
+### Enable Workflows for the Forked Repository
+
+- Go to https://github.com/<your-github-username>/code2cloud-python-flask-webserver/actions/
+- Click on `Enable Workflows` button
+
 ### Onboard the Forked Repository in Prisma Cloud
 
 Follow the instructions in the Prisma Cloud documentation to connect your GitHub repository:  
