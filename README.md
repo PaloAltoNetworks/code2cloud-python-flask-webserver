@@ -49,18 +49,27 @@ Before you begin, ensure you have the following:
 
 - **Prisma Cloud Defender Agent Deployed on K8s Cluster:** The Prisma Cloud Defender agent should be deployed on your Kubernetes cluster and connected to the Prisma Cloud tenant. This ensures that Prisma Cloud can monitor and protect your deployed applications.
 
+- Create your own GitHub Organization
+    1. Go to [GitHub](https://github.com/).
+    1. In the upper-right corner of any page on GitHub, click your profile photo, then click Settings.
+    1. In the "Access" section of the sidebar, click  Organizations.
+    1. Next to the "Organizations" header, click New organization.
+
+
 ## Step-by-Step Procedure  
 
-### Fork this Repository
+### Download the code source
+ 
+Go to the repository: https://github.com/PaloAltoNetworks/code2cloud-python-flask-webserver.  
+Download the code in ZIP format
+![Download the code in ZIP format](docs/download-source-code.png)
 
-Click the "Fork" button in the top-right corner to create your own copy of the repository.  
+### Create a new repository in your organization
 
-### Enable Workflows for the Forked Repository
+Make sure to select your organization as the owner of the new repository:
+![Create new repository](docs/create-new-repo.png)
 
-- Go to https://github.com/<your-github-username>/code2cloud-python-flask-webserver/actions/
-- Click on `Enable Workflows` button
-
-### Onboard the Forked Repository in Prisma Cloud
+### Onboard the New Repository in Prisma Cloud
 
 Follow the instructions in the Prisma Cloud documentation to connect your GitHub repository:  
 [Add GitHub Repository to Prisma Cloud](https://docs.prismacloud.io/en/classic/appsec-admin-guide/get-started/connect-your-repositories/code-repositories/add-github)
@@ -69,13 +78,15 @@ Follow the instructions in the Prisma Cloud documentation to connect your GitHub
 
 Clone your forked repository to your local machine:
 ```bash
-git clone https://github.com/<your-github-username>/code2cloud-python-flask-webserver.git
+git clone https://github.com/<your-github-organization>/code2cloud-python-flask-webserver.git
 ```
 
-### Change the Version Number
-Change the directory to the cloned repository:
+### Push the code on the new repository
 
-```console
+Unzip the code source to a new directory on your local machine.  
+Change the directory and open repository:  
+
+```bash
 cd code2cloud-python-flask-webserver
 ```
 
@@ -86,16 +97,21 @@ version = "0.0.10"  # Update to a new version number
 
 Open the `manifests/deployment.yaml` file and update the container repository name and the  version number:
 ```yaml
-image: ghcr.io/<your-github-username>/code2cloud-python-flask-webserver:v0.0.10  # Update the ontainer repository name with your github username and the version number
+image: ghcr.io/<your-github-organization>/code2cloud-python-flask-webserver:v0.0.10  # Update the ontainer repository name with your github username and the version number
 ```
 
-### Push the changes to the Repository
-
+Initializes a git repository, commits your code, creates the main branch, sets up a remote repository on GitHub, and pushes your code to it.
 ```bash
-git add version.py
-git commit -m "Update version number to 0.0.10"
-git push origin main
+git init
+git add .
+git commit -m "first commit"
+git branch -M main
+git remote add origin git@github.com:<your-github-organization>/org-code2cloud-python-flask-webserver.git
+git push -u origin main
 ```
+
+The push will trigger the GitHub Actions pipeline, which will build the container image and push it to GHCR.
+![Trigger the CI](docs/trigger-ci.png)
 
 ### Create a PAT (Personal Access Token) Token
 - Go to your GitHub account settings.
@@ -114,7 +130,7 @@ Use the PAT token to create a Docker registry secret:
 ```bash
 kubectl create secret docker-registry ghcr-io-creds \
 --docker-server=ghcr.io \
---docker-username=<your-github-username> \
+--docker-username=<your-github-organization> \
 --docker-password=<your_pat_token> \
 --docker-email=<your-github-email>
 ```
@@ -130,8 +146,25 @@ Verify the service is created and accessible:
 kubectl get svc -n code2cloud
 ```
 
-### Access the Application
+### Access the Web Application
 Use the external IP provided by the LoadBalancer service to access the application in your browser.  
 
-## Conclusion
-By following these steps, you have successfully demonstrated the code-to-cloud traceability feature of Prisma Cloud using a Python Flask application. The application is now deployed on a Kubernetes cluster, showcasing automated CI/CD with GitHub Actions and Docker.  
+![Web Application](docs/webapp.png)
+
+### Troubleshooting by verifying the HASH 
+
+Go to https://github.com/<your-github-organization>/code2cloud-python-flask-webserver/actions/  
+Click on latest action and expand the Output image digest step as you can see below:
+![Digest from the logs](docs/digest-logs.png)
+
+Go to home page of you repository and click on the Packages: https://github.com/<your-github-organization>/code2cloud-python-flask-webserver
+![Packages of thge repository](docs/repo-packages.png)
+
+Expand the latest version to verify the digest from the previous step:
+![Digest from GHCR](docs/digest-ghcr.png)
+
+Connect to your Prisma Cloud tenant and search for code2cloud from Runtime Security > Monitor > Vulnerabilities > Images > Deployed, click on the image that was deployed on your kubernetes cluster and verify the hash from previous step:
+![Digest from Prisma Cloud](docs/digest-prisma-cloud.png)
+
+## END
+
