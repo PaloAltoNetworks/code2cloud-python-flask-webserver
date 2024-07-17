@@ -85,9 +85,9 @@ Open the `version.py` file and update the version number:
 version = "0.0.10"  # Update to a new version number
 ```
 
-Open the `manifests/deployment.yaml` file and update the version number:
+Open the `manifests/deployment.yaml` file and update the container repository name and the  version number:
 ```yaml
-image: ghcr.io/simonpanworg/code2cloud-python-flask-webserver:v0.0.10  # Update to a new version number
+image: ghcr.io/<your-github-username>/code2cloud-python-flask-webserver:v0.0.10  # Update the ontainer repository name with your github username and the version number
 ```
 
 ### Push the changes to the Repository
