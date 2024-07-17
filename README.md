@@ -49,7 +49,6 @@ git clone https://github.com/<your-github-username>/code2cloud-python-flask-webs
 
 ### Change the Version Number in version.py
 Change the directory to the cloned repository:
-    
 
 ```console
 cd code2cloud-python-flask-webserver
@@ -69,9 +68,9 @@ git push origin main
 ```
 
 ### Create a PAT (Personal Access Token) Token
-Go to your GitHub account settings.
-Navigate to "Developer settings" and then "Personal access tokens."
-Generate a new token with write:packages scope and save it securely.
+- Go to your GitHub account settings.
+- Navigate to "Developer settings" and then "Personal access tokens."
+- Generate a new token with write:packages scope and save it securely.
 
 ### Deploy the Application with Manifests Files
 Apply the Kubernetes manifests to create the namespace, deployment, and service:
