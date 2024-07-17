@@ -1,12 +1,8 @@
-name: Docker
+name: Build Container and Push on GHCR
 
 on:
-  # schedule:
-  #   - cron: '28 5 * * *'
   push:
     branches: [ "main" ]
-    # Publish semver tags as releases.
-    tags: [ 'v*.*.*' ]
   pull_request:
     branches: [ "main" ]
   workflow_dispatch:  # Allows manual triggering of the workflow
@@ -67,6 +63,4 @@ jobs:
       - name: Output image digest
         id: output-digest
         run: |
-          echo "##[group]Digest"
           echo "digest: ${{ steps.build-and-push.outputs.digest }} size:"
-          echo "##[endgroup]"

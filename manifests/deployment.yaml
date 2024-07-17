@@ -1,0 +1,57 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: code2cloud
+---
+# Deployment manifest
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: code2cloud-python-flask-webserver-deployment
+  namespace: code2cloud
+  labels:
+    app: code2cloud-python-flask-webserver
+    owner: smelotte
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: code2cloud-python-flask-webserver
+  template:
+    metadata:
+      labels:
+        app: code2cloud-python-flask-webserver
+        owner: smelotte
+    spec:
+      containers:
+        - name: code2cloud-python-flask-webserver
+          image: ghcr.io/simonpanworg/code2cloud-python-flask-webserver:v0.0.9
+          ports:
+            - containerPort: 5000
+          readinessProbe:
+            httpGet:
+              path: /actuator/info
+              port: 5000
+            initialDelaySeconds: 30
+          livenessProbe:
+            httpGet:
+              path: /actuator/info
+              port: 5000
+            initialDelaySeconds: 60
+      imagePullSecrets:
+        - name: ghcr-io-creds
+---
+# Service manifest
+apiVersion: v1
+kind: Service
+metadata:
+  name: code2cloud-python-flask-webserver-service
+  namespace: code2cloud
+spec:
+  selector:
+    app: code2cloud-python-flask-webserver
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 5000
+  type: LoadBalancer
