@@ -28,7 +28,6 @@ The steps to access it are as follows:
 ## Goals
 
 - Demonstrate code-to-cloud traceability using Prisma Cloud.
-- Showcase a simple customer management system with CRUD operations.
 - Utilize GitHub Actions for automated CI/CD.
 - Deploy the application using Kubernetes manifests.  
 
