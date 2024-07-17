@@ -40,22 +40,25 @@ Before you begin, ensure you have the following:
 
 ### Clone the repo
     Clone your forked repository to your local machine:
-    ```bash
-    git clone https://github.com/<your-github-username>/code2cloud-python-flask-webserver.git
-    ```
+```bash
+git clone https://github.com/<your-github-username>/code2cloud-python-flask-webserver.git
+```
 
 ### Change the Version Number in version.py
     Change the directory to the cloned repository:
-    ```bash
-    cd code2cloud-python-flask-webserver
-    ```
+    
+
+```console
+cd code2cloud-python-flask-webserver
+```
 
     Open the `version.py` file and update the version number:
-    ```python
-    version = "0.0.10"  # Update to a new version number
-    ```
+```python
+version = "0.0.10"  # Update to a new version number
+```
 
 ### Push the changes to the Repository
+
     ```bash
     git add version.py
     git commit -m "Update version number to 0.0.10"
@@ -69,31 +72,31 @@ Before you begin, ensure you have the following:
 
 ### Deploy the Application with Manifests Files
     Apply the Kubernetes manifests to create the namespace, deployment, and service:
-    ```bash
-    kubectl apply -f manifests/deployment.yaml
-    ```
+```bash
+kubectl apply -f manifests/deployment.yaml
+```
 
 ### Create a Secret in the K8s Cluster to Pull the Image from GHCR  
 
     Use the PAT token to create a Docker registry secret:
-    ```bash
-    kubectl create secret docker-registry ghcr-io-creds \
-    --docker-server=ghcr.io \
-    --docker-username=<github_handle> \
-    --docker-password=<your_pat_token> \
-    --docker-email=<email>
-    ```
+```bash
+kubectl create secret docker-registry ghcr-io-creds \
+--docker-server=ghcr.io \
+--docker-username=<github_handle> \
+--docker-password=<your_pat_token> \
+--docker-email=<email>
+```
 
 ### Verify the Deployment
     Check the status of the pods to ensure they are running:
-    ```bash
-    kubectl get pods -n code2cloud
-    ```
+```bash
+kubectl get pods -n code2cloud
+```
 
     Verify the service is created and accessible:
-    ```bash
-    kubectl get svc -n code2cloud
-    ```
+```bash
+kubectl get svc -n code2cloud
+```
 
 ### Access the Application
     Use the external IP provided by the LoadBalancer service to access the application in your browser.  
