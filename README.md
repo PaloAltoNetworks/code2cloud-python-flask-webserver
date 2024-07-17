@@ -4,6 +4,27 @@
 
 This repository contains a Python Flask application designed to demonstrate the code-to-cloud traceability feature of Prisma Cloud. The application allows users to manage customer data, showcasing CRUD (Create, Read, Update, Delete) operations, and is containerized for deployment on cloud platforms like AKS, EKS, or GKE. The pipeline utilizes GitHub Actions for CI/CD, building and pushing the Docker image to GitHub Container Registry (GHCR).  
 
+## Illustrations
+
+Code2Cloud traceability is a GA feature and available now. 
+#### Code2Cloud Traceability
+![Code2Cloud Traceability](docs/code2cloud-traceability.png)
+
+
+#### Code2Cloud Impact Graph (BETA)
+The impact graph is a **BETA** feature and requires a feature flag to be enabled.  
+The steps to access it are as follows:
+1. Go to the Investigate tab.
+2. Search for a vulnerability with CVE ID: CVE-2023-3104.
+3. Click on the runtime container image.
+4. Click "View C2C Impact Graph".
+
+#### Code2Cloud Investigate
+![Code2Cloud Investigate](docs/code2cloud-investigate.png)
+
+#### Code2Cloud Impact Graph
+![Code2Cloud Impact Graph](docs/code2cloud-impact-graph.png)
+
 ## Goals
 
 - Demonstrate code-to-cloud traceability using Prisma Cloud.
@@ -47,7 +68,7 @@ Clone your forked repository to your local machine:
 git clone https://github.com/<your-github-username>/code2cloud-python-flask-webserver.git
 ```
 
-### Change the Version Number in version.py
+### Change the Version Number
 Change the directory to the cloned repository:
 
 ```console
@@ -57,6 +78,11 @@ cd code2cloud-python-flask-webserver
 Open the `version.py` file and update the version number:
 ```python
 version = "0.0.10"  # Update to a new version number
+```
+
+Open the `manifests/deployment.yaml` file and update the version number:
+```yaml
+image: ghcr.io/simonpanworg/code2cloud-python-flask-webserver:v0.0.10  # Update to a new version number
 ```
 
 ### Push the changes to the Repository
