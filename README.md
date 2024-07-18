@@ -58,15 +58,14 @@ Before you begin, ensure you have the following:
 
 ## Step-by-Step Procedure  
 
-### Download the code source
+### Fork the Repository
  
-Go to the repository: https://github.com/PaloAltoNetworks/code2cloud-python-flask-webserver.  
-Download the code in ZIP format
-![Download the code in ZIP format](docs/download-source-code.png)
+- Go to the repository: https://github.com/PaloAltoNetworks/code2cloud-python-flask-webserver.  
+- Click the "Fork" button in the top-right corner to create your own copy of the repository
 
 ### Create a new repository in your organization
 
-Make sure to select your organization as the owner of the new repository:
+When you create repositories for C2C, make sure you are creating in a GitHub organization, not the individual repos. Cider doesn’t fetch pipeline and build logs from individual repositories, which are required for C2C.  
 ![Create new repository](docs/create-new-repo.png)
 
 ### Onboard the New Repository in Prisma Cloud
@@ -74,11 +73,11 @@ Make sure to select your organization as the owner of the new repository:
 Follow the instructions in the Prisma Cloud documentation to connect your GitHub repository:  
 [Add GitHub Repository to Prisma Cloud](https://docs.prismacloud.io/en/classic/appsec-admin-guide/get-started/connect-your-repositories/code-repositories/add-github)
 
-### Clone the repo
+### Clone the Forked repository
 
 Clone your forked repository to your local machine:
 ```bash
-git clone https://github.com/<your-github-organization>/code2cloud-python-flask-webserver.git
+git clone https://github.com/<your-github-username>/code2cloud-python-flask-webserver.git
 ```
 
 ### Push the code on the new repository
@@ -100,13 +99,9 @@ Open the `manifests/deployment.yaml` file and update the container repository na
 image: ghcr.io/<your-github-organization>/code2cloud-python-flask-webserver:v0.0.10  # Update the ontainer repository name with your github username and the version number
 ```
 
-Initializes a git repository, commits your code, creates the main branch, sets up a remote repository on GitHub, and pushes your code to it.
+In your local repository, set the new remote URL to point to the repository you just created in your organization.
 ```bash
-git init
-git add .
-git commit -m "first commit"
-git branch -M main
-git remote add origin git@github.com:<your-github-organization>/org-code2cloud-python-flask-webserver.git
+git remote set-url origin  git@github.com:<your-github-organization>/org-code2cloud-python-flask-webserver.git
 git push -u origin main
 ```
 
