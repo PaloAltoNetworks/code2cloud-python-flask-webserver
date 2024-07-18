@@ -66,6 +66,7 @@ Before you begin, ensure you have the following:
 ### Create a new repository in your organization
 
 When you create repositories for C2C, make sure you are creating in a GitHub organization, not the individual repos. Cider doesn’t fetch pipeline and build logs from individual repositories, which are required for C2C.  
+Named the new repository: `code2cloud-python-flask-webserver`.
 ![Create new repository](docs/create-new-repo.png)
 
 ### Onboard the New Repository in Prisma Cloud
@@ -101,7 +102,7 @@ image: ghcr.io/<your-github-organization>/code2cloud-python-flask-webserver:v0.0
 
 In your local repository, set the new remote URL to point to the repository you just created in your organization.
 ```bash
-git remote set-url origin  git@github.com:<your-github-organization>/org-code2cloud-python-flask-webserver.git
+git remote set-url origin  git@github.com:<your-github-organization>/code2cloud-python-flask-webserver.git
 git push -u origin main
 ```
 
