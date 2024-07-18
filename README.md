@@ -83,21 +83,10 @@ git clone https://github.com/<your-github-username>/code2cloud-python-flask-webs
 
 ### Push the code on the new repository
 
-Unzip the code source to a new directory on your local machine.  
 Change the directory and open repository:  
 
 ```bash
 cd code2cloud-python-flask-webserver
-```
-
-Open the `version.py` file and update the version number:
-```python
-version = "0.0.10"  # Update to a new version number
-```
-
-Open the `manifests/deployment.yaml` file and update the container repository name and the  version number:
-```yaml
-image: ghcr.io/<your-github-organization>/code2cloud-python-flask-webserver:v0.0.10  # Update the ontainer repository name with your github username and the version number
 ```
 
 In your local repository, set the new remote URL to point to the repository you just created in your organization.
@@ -146,6 +135,33 @@ kubectl get svc -n code2cloud
 Use the external IP provided by the LoadBalancer service to access the application in your browser.  
 
 ![Web Application](docs/webapp.png)
+
+
+
+### Implement changes on the application
+
+Go to the directory and open repository:  
+
+```bash
+cd code2cloud-python-flask-webserver
+```
+
+Implement the changes in the source code.
+
+Open the `version.py` file and update the version number:
+```python
+version = "0.0.10"  # Update to a new version number
+```
+
+Open the `manifests/deployment.yaml` file and update the container repository name and the  version number:
+```yaml
+image: ghcr.io/<your-github-organization>/code2cloud-python-flask-webserver:v0.0.10  # Update the ontainer repository name with your github username and the version number
+```
+
+Apply the Kubernetes manifests to create the namespace, deployment, and service:
+```bash
+kubectl apply -f manifests/deployment.yaml
+```
 
 ### Troubleshooting by verifying the HASH 
 
