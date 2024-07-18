@@ -63,7 +63,7 @@ Before you begin, ensure you have the following:
 - Go to the repository: https://github.com/PaloAltoNetworks/code2cloud-python-flask-webserver.  
 - Click the "Fork" button in the top-right corner to create your own copy of the repository
 
-### Create a new repository in your organization
+### Create a new repository in your own organization
 
 When you create repositories for C2C, make sure you are creating in a GitHub organization, not the individual repos. Cider doesn’t fetch pipeline and build logs from individual repositories, which are required for C2C.  
 Named the new repository: `code2cloud-python-flask-webserver`.
@@ -74,14 +74,14 @@ Named the new repository: `code2cloud-python-flask-webserver`.
 Follow the instructions in the Prisma Cloud documentation to connect your GitHub repository:  
 [Add GitHub Repository to Prisma Cloud](https://docs.prismacloud.io/en/classic/appsec-admin-guide/get-started/connect-your-repositories/code-repositories/add-github)
 
-### Clone the Forked repository
+### Clone the Forked repository 
 
 Clone your forked repository to your local machine:
 ```bash
 git clone https://github.com/<your-github-username>/code2cloud-python-flask-webserver.git
 ```
 
-### Push the code on the new repository
+### Update remote URL and push the code on the new repository in your organization
 
 Change the directory and open repository:  
 
