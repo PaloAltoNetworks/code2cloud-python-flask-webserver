@@ -63,4 +63,6 @@ jobs:
       - name: Output image digest
         id: output-digest
         run: |
+          echo "##[group]Digest"
           echo "digest: ${{ steps.build-and-push.outputs.digest }} size:"
+          echo "##[endgroup]"
