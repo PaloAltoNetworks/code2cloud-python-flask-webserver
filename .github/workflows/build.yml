@@ -46,7 +46,7 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
-            type=ref,event=branch
+           # type=ref,event=branch
             type=raw,value=${{ env.APPLICATION_VERSION }}
 
       # Build and push Docker image with Buildx (don't push on PR)
@@ -63,6 +63,4 @@ jobs:
       - name: Output image digest
         id: output-digest
         run: |
-          echo "##[group]Digest"
           echo "digest: ${{ steps.build-and-push.outputs.digest }} size:"
-          echo "##[endgroup]"
